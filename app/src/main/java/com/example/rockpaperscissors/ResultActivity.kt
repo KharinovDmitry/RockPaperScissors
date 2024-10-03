@@ -10,16 +10,22 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
-        var user = intent.getIntExtra(ChoiceKey, -1)
-        var computer = (1..3).random()
+        val player = intent.getIntExtra(ChoiceKey, -1)
+        val computer = (1..3).random()
 
-        var resultTextView =  findViewById<TextView>(R.id.result_textview)
+        val playerChoiceTextView = findViewById<TextView>(R.id.player_choice)
+        val computerChoiceTextView = findViewById<TextView>(R.id.computer_choice)
 
-        if (user == computer)  {
+        playerChoiceTextView.text = getTextByChoice(player)
+        computerChoiceTextView.text = getTextByChoice(computer)
+
+        val resultTextView =  findViewById<TextView>(R.id.result_textview)
+
+        if (player == computer)  {
             resultTextView.text = "Ничья!"
-        } else if (user == Rock && computer == Scissors ||
-                   user == Paper && computer == Rock ||
-                   user == Scissors && computer == Paper) {
+        } else if (player == Rock && computer == Scissors ||
+            player == Paper && computer == Rock ||
+            player == Scissors && computer == Paper) {
             resultTextView.text = "Вы победили!"
         } else {
             resultTextView.text = "Вы проиграли! С вас 10 рублей"
